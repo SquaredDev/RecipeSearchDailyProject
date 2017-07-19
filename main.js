@@ -5,14 +5,14 @@ let heading = document.querySelector('#heading');
 let main = document.querySelector('#main');
 let footing = document.querySelector('#footing');
 
-let url = "http://www.recipepuppy.com/api/"
+const site = "http://www.recipepuppy.com/api/"
+let recipe = " "
+let ingred = " "
+let url = site + "?i=" + ingred + "&q=" + recipe
 
 fetch(url)
-  // Data is fetched and we get a promise.
   .then(
-    // The promise returns a response from the server.
     function(response) {
-      // We process the response accordingly.
       if (response.status !== 200) {
         console.log(response.status);
         return;
@@ -22,22 +22,24 @@ fetch(url)
         let titleStr = `${data.title} Search`
         title.innerHTML = titleStr
 
+        // http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3
+
         let headingStr = ``
         headingStr += `<h1>${data.title} Search</h1>`
+        headingStr += `<form>Recipe Type:<input id='recipe' type="text" name="recipe" value="" maxlength="100" /><br />`
+        headingStr += `Ingredients:<input id='ingred' type="text" name="ingredients" value="" maxlength="100" /><br />`
+        headingStr += `<input id='search' type="submit" value="Search" /></form>`
         headingStr += `<p>Results from <a href="${data.href}">${data.href}</a></p>`
         headingStr += `<hr>`
         heading.innerHTML = headingStr
 
-          // "title":"Vegetable-Pasta Oven Omelet",
-          // "href":"http:\/\/find.myrecipes.com\/recipes\/recipefinder.dyn?action=displayRecipe&recipe_id=520763",
-          // "ingredients":"tomato, onions, red pepper, garlic, olive oil, zucchini, cream cheese, vermicelli, eggs, parmesan cheese, milk, italian seasoning, salt, black pepper",
-          // "thumbnail":"http:\/\/img.recipepuppy.com\/560556.jpg"
-
+          let mainStr = ``
         data.results.map(function(item) {
-            let mainStr = ``
+
             mainStr += `<div class="boxes">
             <img class="profilePic" src="${item.thumbnail}">
-            <p class="rName">${item.title}</p>
+            <p class="rName"><a href="${item.href}">${item.title}</a></p>
+            <ul>${item.ingredients}</ul>
             </div>`
             main.innerHTML = mainStr
         })
