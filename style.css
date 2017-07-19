@@ -2,7 +2,11 @@
 
 #heading {}
 
-#main {}
+#main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 
 #footing {}
 
@@ -12,9 +16,14 @@
 
 #search {}
 
-.boxes {}
+.boxes {
+  width: 250px;
+  border: 1px solid black;
+}
 
-.profilePic {}
+.profilePic {
+  width: 80%;
+}
 
 .rName {}
 

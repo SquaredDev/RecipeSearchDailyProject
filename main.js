@@ -1,4 +1,5 @@
 //#RecipeSearchDailyProject
+console.log('here');
 
 let title = document.querySelector('title');
 let heading = document.querySelector('#heading');
@@ -6,12 +7,21 @@ let main = document.querySelector('#main');
 let footing = document.querySelector('#footing');
 let recipeI = document.querySelector('#recipe');
 let ingredI = document.querySelector('#ingred');
-let search = document.querySelector('#search');
+let searchI = document.getElementById('search');
 
 const site = "http://www.recipepuppy.com/api/"
 let recipe = " "
 let ingred = " "
-let url = site + "?i=" + ingred + "&q=" + recipe
+let url = site
+
+searchI.addEventListener ("click", function(event) {
+  console.log('hey');
+  recipe = recipeI.value
+  ingred = ingredI.value
+  url = site + "?i=" + ingred + "&q=" + recipe
+  console.log(url);
+  doFetch();
+})
 
 function doFetch() {
   fetch(url)
@@ -22,29 +32,23 @@ function doFetch() {
           return;
         }
         response.json().then(function(data) {
-          console.log(`Here is the data: ${data.title}`, data);
           let titleStr = `${data.title} Search`
           title.innerHTML = titleStr
 
-          // http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3
-
-          let headingStr = ``
-          headingStr += `<h1>${data.title} Search</h1>`
-          headingStr += `<form>Recipe Type:<input id='recipe' type="text" name="recipe" value="" maxlength="100" /><br />`
-          headingStr += `Ingredients:<input id='ingred' type="text" name="ingredients" value="" maxlength="100" /><br />`
-          headingStr += `<input id='search' type="submit" value="Search" /></form>`
-          headingStr += `<p>Results from <a href="${data.href}">${data.href}</a></p>`
-          headingStr += `<hr>`
-          heading.innerHTML = headingStr
 
             let mainStr = ``
           data.results.map(function(item) {
-
-              mainStr += `<div class="boxes">
-              <img class="profilePic" src="${item.thumbnail}">
-              <p class="rName"><a href="${item.href}">${item.title}</a></p>
-              <ul>${item.ingredients}</ul>
-              </div>`
+              mainStr += `<div class="boxes">`
+              // if (`${item.thumbnail}` === "") {
+              //   mainStr += `<img class="profilePic" src="http://img.recipepuppy.com/9.jpg">`
+              //   else {
+              //     mainStr += `<img class="profilePic" src="${item.thumbnail}">`
+              //   }
+              // }
+              mainStr += `<img class="profilePic" src="${item.thumbnail}">`
+              mainStr += `<p class="rName"><a href="${item.href}">${item.title}</a></p>`
+              mainStr += `<ul>${item.ingredients}</ul>`
+              mainStr += `</div>`
               main.innerHTML = mainStr
           })
 
@@ -59,10 +63,13 @@ function doFetch() {
     });
 }
 
-doFetch()
-
-search.addEventListener('click', function(event) {
+searchI.addEventListener ("click", function(event) {
+  console.log('hey');
   recipe = recipeI.value
   ingred = ingredI.value
+  url = site + "?i=" + ingred + "&q=" + recipe
   console.log(url);
+  doFetch();
 })
+
+doFetch()
