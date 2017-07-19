@@ -1,9 +1,12 @@
-console.log('page connected');
+//#RecipeSearchDailyProject
 
 let title = document.querySelector('title');
 let heading = document.querySelector('#heading');
 let main = document.querySelector('#main');
 let footing = document.querySelector('#footing');
+let recipeI = document.querySelector('#recipe');
+let ingredI = document.querySelector('#ingred');
+let search = document.querySelector('#search');
 
 const site = "http://www.recipepuppy.com/api/"
 let recipe = " "
