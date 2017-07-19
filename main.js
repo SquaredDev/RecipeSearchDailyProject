@@ -28,11 +28,21 @@ fetch(url)
         headingStr += `<hr>`
         heading.innerHTML = headingStr
 
-        let boxes = []
-        boxes.push(`${data.results}`)
-        console.log(boxes);
-        let mainStr = ``
-        main.innerHTML = mainStr
+        for (var i = 0; i < data.results.length; i++) {
+          let mainStr = ``
+          mainStr += `<div class="boxes">`
+          mainStr += `<img scr="${data.results.thumbnail}">`
+          mainStr += `<p>${data.results.title}</p>`
+
+          // "title":"Vegetable-Pasta Oven Omelet",
+          // "href":"http:\/\/find.myrecipes.com\/recipes\/recipefinder.dyn?action=displayRecipe&recipe_id=520763",
+          // "ingredients":"tomato, onions, red pepper, garlic, olive oil, zucchini, cream cheese, vermicelli, eggs, parmesan cheese, milk, italian seasoning, salt, black pepper",
+          // "thumbnail":"http:\/\/img.recipepuppy.com\/560556.jpg"
+          mainStr += `</div>`
+          main.innerHTML = mainStr
+        }
+
+
 
         let footingStr = `<hr><footer>${data.title} Version ${data.version} <a href="${data.href}">${data.href}</a></footer>`
         footing.innerHTML = footingStr
