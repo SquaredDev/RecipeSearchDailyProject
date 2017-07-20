@@ -1,5 +1,4 @@
 //#RecipeSearchDailyProject
-console.log('here');
 
 let title = document.querySelector('title');
 let heading = document.querySelector('#heading');
@@ -8,6 +7,7 @@ let footing = document.querySelector('#footing');
 let recipeI = document.querySelector('#recipe');
 let ingredI = document.querySelector('#ingred');
 let searchI = document.getElementById('search');
+let pic= document.getElementsByClassName('pic')
 
 const site = "http://www.recipepuppy.com/api/"
 let recipe = " "
@@ -15,11 +15,9 @@ let ingred = " "
 let url = site
 
 searchI.addEventListener ("click", function(event) {
-  console.log('hey');
   recipe = recipeI.value
   ingred = ingredI.value
   url = site + "?i=" + ingred + "&q=" + recipe
-  console.log(url);
   doFetch();
 })
 
@@ -39,15 +37,8 @@ function doFetch() {
             let mainStr = ``
           data.results.map(function(item) {
               mainStr += `<div class="boxes">`
-              // if (`${item.thumbnail}` === "") {
-              //   mainStr += `<img class="profilePic" src="http://img.recipepuppy.com/9.jpg">`
-              //   else {
-              //     mainStr += `<img class="profilePic" src="${item.thumbnail}">`
-              //   }
-              // }
-              mainStr += `<img class="profilePic" src="${item.thumbnail}">`
+              mainStr += `<span class="pic"><img class="profilePic" src="${item.thumbnail}"></span>`
               mainStr += `<p class="rName"><a href="${item.href}">${item.title}</a></p>`
-              mainStr += `<ul>${item.ingredients}</ul>`
               mainStr += `</div>`
               main.innerHTML = mainStr
           })
@@ -64,12 +55,14 @@ function doFetch() {
 }
 
 searchI.addEventListener ("click", function(event) {
-  console.log('hey');
   recipe = recipeI.value
   ingred = ingredI.value
   url = site + "?i=" + ingred + "&q=" + recipe
-  console.log(url);
   doFetch();
 })
 
 doFetch()
+
+if (pic.innerHTML === '<img class="profilePic" src="">') {
+  console.log('what?');
+}
