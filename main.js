@@ -37,7 +37,7 @@ function doFetch() {
             let mainStr = ``
           data.results.map(function(item) {
               mainStr += `<div class="boxes">`
-              mainStr += `<span class="pic"><img class="profilePic" src="${item.thumbnail}"></span>`
+              mainStr += `<div class="pic"><img class="profilePic" src="${item.thumbnail}"></div>`
               mainStr += `<p class="rName"><a href="${item.href}">${item.title}</a></p>`
               mainStr += `</div>`
               main.innerHTML = mainStr
